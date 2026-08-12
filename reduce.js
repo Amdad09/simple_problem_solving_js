@@ -1,16 +1,23 @@
-const arr = [1, 2, 3, 4];
-const result = arr.reduce((acc, cur) => {
-    return acc + cur;
-});
-// console.log(result);
-
-const cart = [
-    { name: 'pen', price: 15, qty: 5 },
-    { name: 'notebook', price: 15, qty: 4 },
+const products = [
+    { name: 'Laptop', price: 1200, category: 'Electrics', stock: 6 },
+    { name: 'Laptop', price: 1200, category: 'Electrics', stock: 6 },
+    { name: 'Laptop', price: 1200, category: 'Clothing', stock: 6 },
+    { name: 'Laptop', price: 1200, category: 'Clothing', stock: 6 },
+    { name: 'Laptop', price: 1200, category: 'Clothing', stock: 8 },
 ];
 
-const total = cart.reduce((accu, curr) => {
-    accu.totalPrice += curr.price;
-    return accu;
-}, { totalPrice: 0 })
-console.log(total);
+const productPrice = (products) => {
+    return products.reduce(
+        ({ electronics, clothing }, { category, price, stock }) => {
+            if (category === 'Electrics') {
+                electronics += price * stock;
+            } else {
+                clothing += price * stock;
+            }
+            return { electronics, clothing };
+        },
+        { electronics: 0, clothing: 0 },
+    );
+};
+
+console.log(productPrice(products));
