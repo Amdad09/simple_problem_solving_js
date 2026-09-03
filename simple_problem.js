@@ -21,3 +21,52 @@ function checkPasswordStrength(password) {
     }
 }
 
+function convertCase(str) {
+    let result = '';
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] >= 'A' && 'Z' >= str[i]) {
+            result += str[i].toLowerCase();
+        } else if (str[i] >= 'a' && 'z' >= str[i]) {
+            result += str[i].toUpperCase();
+        } else {
+            result += str[i];
+        }
+    }
+    return result;
+}
+
+function sumEvenDigits(num) {
+    const value = num.toString();
+    let result = 0;
+    for (let i = 0; i < value.length; i++) {
+        if (value[i] % 2 === 0) {
+            result += Number(value[i]);
+        }
+    }
+    return result;
+}
+
+function findHighScoringStudents(marks) {
+    const result = [];
+    for (const key of Object.keys(marks)) {
+        if (marks[key] >= 60) {
+            result.push(key);
+        }
+    }
+    return result;
+}
+
+function reverseLongestWord(sentence) {
+    const strs = sentence.split(' ');
+    let max = strs[0];
+    for (let i = 0; i < strs.length; i++) {
+        if (max.length < strs[i].length) {
+            max = strs[i];
+        }
+    }
+    let reverse = '';
+    for (let i = max.length-1; i >= 0; i--) {
+        reverse += max[i];
+    }
+    return reverse;
+}
