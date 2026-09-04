@@ -1,16 +1,16 @@
-function checkPasswordStrength(password) {
-    const length = password.length;
+function checkwordsStrength(words) {
+    const length = words.length;
     let uppercase = 0;
     let lowercase = 0;
     let digit = 0;
-    for (let i = 0; i < password.length; i++) {
-        if (password[i] >= 'A' && 'Z' >= password[i]) {
+    for (let i = 0; i < words.length; i++) {
+        if (words[i] >= 'A' && 'Z' >= words[i]) {
             uppercase++;
         }
-        if (password[i] >= 'a' && 'z' >= password[i]) {
+        if (words[i] >= 'a' && 'z' >= words[i]) {
             lowercase++;
         }
-        if (password[i] >= '0' && password[i] <= '9') {
+        if (words[i] >= '0' && words[i] <= '9') {
             digit++;
         }
     }
@@ -65,8 +65,90 @@ function reverseLongestWord(sentence) {
         }
     }
     let reverse = '';
-    for (let i = max.length-1; i >= 0; i--) {
+    for (let i = max.length - 1; i >= 0; i--) {
         reverse += max[i];
     }
     return reverse;
 }
+
+function convertToCamelCase(sentence) {
+    const words = sentence.trim().split(/\s+/);
+    let result = words[0].toLowerCase();
+    for (let i = 1; i < words.length; i++) {
+        result += words[i][0].toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+    return result;
+}
+
+function countEvenOdd(numbers) {
+    let even = 0;
+    let odd = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] % 2 === 0) {
+            even++;
+        } else {
+            odd++;
+        }
+    }
+    return { even, odd };
+}
+
+function findFirstUniqueChar(s) {
+    for (let i = 0; i < s.length; i++) {
+        let check = s[i];
+        let count = 0;
+        for (let j = 0; j < s.length; j++) {
+            if (check === s[j]) {
+                count++;
+            }
+        }
+        if (count === 1) {
+            return check;
+        }
+    }
+    return -1;
+}
+
+function findLongestWord(sentence) {
+    let current = '';
+    let max = '';
+
+    for (const char of sentence) {
+        const isLetter =
+            (char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z');
+
+        const isDigit = char >= '0' && char <= '9';
+
+        if (isLetter || isDigit) {
+            current += char;
+        } else {
+            if (current.length > max.length) {
+                max = current;
+            }
+            current = '';
+        }
+    }
+
+    if (current.length > max.length) {
+        max = current;
+    }
+    return max;
+}
+
+function findSecondLargestUnique(numbers) {
+    let largest = -Infinity;
+    let secondLargest = -Infinity;
+    for (let i = 0; i < numbers.length; i++){
+        if (largest < numbers[i]) {
+            secondLargest = largest;
+            largest = numbers[i];
+        } else if (numbers[i] > secondLargest && numbers[i] !== largest) {
+            secondLargest = numbers[i];
+        }
+    }
+    if (secondLargest === -Infinity) {
+        return null;
+    }
+    return secondLargest;
+}
+console.log(findSecondLargestUnique([10, 5, 20, 5, 15]));
